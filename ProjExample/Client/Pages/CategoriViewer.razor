@@ -15,7 +15,7 @@
     protected override void OnParametersSet()
     {
         //делаем запрос на получение продуктов по категории.
-        // produkt = await Http.GetFromJsonAsync<List<string>?>($"Categoru/{CategoriId}/produkt");
+        // produkt = await Http.GetFromJsonAsync<List<string>?>($"api/Categories/{CategoriId}/produkt");
 
         //для примера хардкод
         produkts = new List<string> { $"Категория {CategoriId}, товар 1", $"Категория {CategoriId}, товар 2", $"Категория {CategoriId}, товар 3" };

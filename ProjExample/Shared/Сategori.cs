@@ -1,8 +1,8 @@
 namespace ProjExample.Shared
 {
-    public class Ñategories
+    public class Ñategori
     {
-        public string Url { get; set; } = string.Empty;
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
     }
 }

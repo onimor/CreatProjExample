@@ -4,7 +4,7 @@ using ProjExample.Shared;
 namespace ProjExample.Server.Controllers
 {
     [ApiController]
-    [Route("Categories")]
+    [Route("api/Categories")]
     public class CategoriesController : ControllerBase
     {
         
@@ -16,11 +16,11 @@ namespace ProjExample.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Ñategories> Get()
+        public IEnumerable<Ñategori> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new Ñategories
+            return Enumerable.Range(1, 5).Select(index => new Ñategori
             {
-                Url = $"Categori/{index}",
+                Id = index,
                 Name = index.ToString()
             })
             .ToArray();

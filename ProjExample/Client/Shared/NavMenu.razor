@@ -16,7 +16,7 @@
             @foreach (var categori in categories!)
             {
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="@categori.Url" Match="NavLinkMatch.All">
+                    <NavLink class="nav-link" href="@($"Categori/{categori.Id}")" Match="NavLinkMatch.All">
                         <span class="oi oi-home" aria-hidden="true"></span> @categori.Name
                     </NavLink>
                 </div>
@@ -34,11 +34,11 @@
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-    private Сategories[]? categories = { };
+    private Сategori[]? categories = { };
 
     protected override async Task OnInitializedAsync()
     {
-        categories = await Http.GetFromJsonAsync<Сategories[]>("Categories");
+        categories = await Http.GetFromJsonAsync<Сategori[]>("api/Categories");
     }
     private void ToggleNavMenu()
     {
