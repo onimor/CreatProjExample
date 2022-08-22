@@ -1,0 +1,29 @@
+﻿@page "/Categori/{CategoriId}"
+@using ProjExample.Shared
+@inject HttpClient Http
+
+@if (produkts is not null)
+{
+    @foreach (var produkt in produkts)
+    {
+        <h1>@produkt</h1>
+    }
+}
+@code {
+    [Parameter] public string CategoriId { get; set; }
+    private List<string>? produkts;
+    protected override void OnParametersSet()
+    {
+        //делаем запрос на получение продуктов по категории.
+        // produkt = await Http.GetFromJsonAsync<List<string>?>($"Categoru/{CategoriId}/produkt");
+
+        //для примера хардкод
+        produkts = new List<string> { $"Категория {CategoriId}, товар 1", $"Категория {CategoriId}, товар 2", $"Категория {CategoriId}, товар 3" };
+        StateHasChanged();
+        base.OnParametersSet();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+       
+    }
+}

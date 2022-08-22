@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using ProjExample.Shared
+@inject HttpClient Http
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">ProjExample</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -9,21 +11,22 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
+        @if (categories?.Length > 0)
+        {
+            @foreach (var categori in categories!)
+            {
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="@categori.Url" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> @categori.Name
+                    </NavLink>
+                </div>
+            }
+        }
+        else
+        {
+            <h1>загрузка</h1>
+        }
+
     </nav>
 </div>
 
@@ -31,7 +34,12 @@
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private Сategories[]? categories = { };
 
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await Http.GetFromJsonAsync<Сategories[]>("Categories");
+    }
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
